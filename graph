@@ -1,0 +1,38 @@
+(*TP n°4 graphe *)
+
+let sommets_exemple = [0;1;2;3;4;5;6;7;8;9] ;;
+let arcs_exemple = [(0,1);(1,3);(0,2);(2,3);(3,5);(3,4);(4,2)
+;(4,7);(6,4);(6,7);(7,8);(7,9);(8,9)] ;;
+
+type graphe_1 = bool array array ;;
+type graphe_2 = int list array ;;
+
+let construction_1 list couple_list = 
+	let t_list = List.length(list) in
+	let mat = Array.make_matrix t_list t_list false in 
+		let rec aux list = match list with 
+			| [] -> ()
+			| ((a,b)::tl) -> begin
+				mat.(a).(b) <- true
+				; aux tl
+				end
+		in
+aux couple_list;
+mat;;
+
+
+let construction_2 list list_c = 
+	let taille_l = List.length(list) in 
+	let (mat:graphe_2) = Array.make taille_l [] in 
+		let rec aux list = match list with 
+			| [] -> ()
+			| (a,b)::tl -> begin
+				mat.(a) <- b::mat.(a);
+				aux tl
+				end
+		in
+	aux list_c;
+mat;;
+
+
+
